@@ -1,0 +1,70 @@
+
+
+<!-- here class & "container-fluid" "row-fluid" cannot be used... -->
+
+
+<div id="sp-nav">
+    <!--Sidebar content-->
+
+    <div class="topcoat-list-container">
+        <ul class="topcoat-list">
+            <li class="topcoat-list__item">
+                Search: <input ng-model="query">
+            </li>
+            <li class="topcoat-list__item">
+                Sort by:
+                <select ng-model="orderProp">
+                    <option value="name">Alphabetical</option>
+                    <option value="age">Newest</option>
+                </select>
+            </li>
+            <li class="topcoat-list__item">
+                About
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+<div id="sp-page">
+    <!--Body content-->
+
+
+    <div id="my-handle" class="handle-vertical" ng-click="$spMenu.toggle()"></div>
+    <!--
+    <div id="my-handle" class="handle-horizontal" ng-click="$spMenu.toggle()"></div>
+    -->
+    <div id="my-bar" class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item left quarter">
+            <a class="topcoat-icon-button--quiet" href="" ng-click="$spMenu.toggle()">
+                <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+            </a>
+        </div>
+        <div class="topcoat-navigation-bar__item center half">
+            <h1 class="topcoat-navigation-bar__title">Angular Phonecat (with ng-mobile-menu) Demo</h1>
+        </div>
+        <div class="topcoat-navigation-bar__item right quarter">
+            <a class="topcoat-icon-button--quiet">
+                <span class="topcoat-icon topcoat-icon--edit"></span>
+            </a>
+        </div>
+    </div>
+
+    <div id="my-phones" class="topcoat-list-container">
+
+        <ul class="phones-list topcoat-list">
+            <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"
+                class="thumbnail phone-listing topcoat-list__item">
+                <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+                <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+
+                <p>{{phone.snippet}}</p>
+            </li>
+        </ul>
+
+    </div>
+
+
+
+</div>
