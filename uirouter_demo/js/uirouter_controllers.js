@@ -32,7 +32,7 @@ controllerModule.controller('ContactsCtrl',
         }
     ]
 );
-*/
+ */
 
 controllerModule.controller('ContactsDetailCtrl',
     [
@@ -80,3 +80,4 @@ controllerModule.controller('ContactsDetailItemEditCtrl',
         }
     ]
 );
+
