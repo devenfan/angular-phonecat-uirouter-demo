@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+<head>
+    <meta charset="utf-8">
+    <!--
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+    -->
+    <title>Google Phone Gallery</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <!-- This css cannot be used!!!
+    <link rel="stylesheet" href="css/animations.css">
+    -->
+
+    <script type="text/javascript" src="lib/jquery/jquery-1.10.2.js"></script>
+
+    <script type="text/javascript" src="lib/angular-v1.1.5/angular.js"></script>
+    <script type="text/javascript" src="lib/angular-v1.1.5/angular-resource.js"></script>
+    <!--<script src="lib/angular/angular-animate.js"></script>-->
+    <!--<script src="lib/angular/angular-route.js"></script>-->
+
+    <!-- include carousel src (using ngMobile) -->
+    <script type="text/javascript" src="lib/angular-carousel-v0.0.8/angular-mobile.js"></script>
+    <script type="text/javascript" src="lib/angular-carousel-v0.0.8/angular-carousel.js"></script>
+    <link href='lib/angular-carousel-v0.0.8/angular-carousel.min.css' rel='stylesheet' type='text/css'>
+
+    <!-- include ng-mobile-menu src (using ngMobile) -->
+    <link rel="stylesheet" href="lib/topcoat/css/topcoat-mobile-light.min.css"/>
+    <link rel="stylesheet" href="lib/ng-mobile-menu/ng-mobile-menu.min.css"/>
+    <script type="text/javascript" src="lib/ng-mobile-menu/ng-mobile-menu.min.js"></script>
+
+    <!-- include angular-ui-router src-->
+    <script src="../uirouter_demo/lib/angular-ui-router/angular-ui-router.js"></script>
+
+    <script type="text/javascript" src="js/app3.js"></script>
+    <script type="text/javascript" src="js/filters.js"></script>
+    <script type="text/javascript" src="js/services.js"></script>
+    <script type="text/javascript" src="js/directives.js" ></script>
+
+    <script type="text/javascript" src="js/animations.js" ></script>
+
+    <style>
+
+        /** Attention:
+         * 1. the background-color for 'body', '#sp-page', '#sp-nav' is must.
+         * 2. the background-color for 'body' and '#sp-page' should be the same!!!
+         */
+
+        body {
+            background-color: #ffffff;
+        }
+
+        #sp-nav {
+            background-color: #d3d3d3;
+            color: whitesmoke;
+        }
+
+        #sp-page {
+            background-color: #ffffff;
+            color: whitesmoke;
+        }
+
+        #sp-page .handle-vertical {
+            -webkit-user-select: none;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 28px;
+            height: 100%;
+            border-left: 1px solid #666666;
+            border-right: 1px solid #ffffff;
+            background-color: rgba(135, 135, 135, 0.78);
+            background: url(img/handle_vertical_black.png) no-repeat 50% 50%, -webkit-gradient(linear, 100% 50%, 0 50%, color-stop(0, #dadada), color-stop(0.1, #d3d3d3), color-stop(0.8, #a6a6a6));
+            -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+        }
+
+        #sp-page .handle-horizontal {
+            -webkit-user-select: none;
+            position: absolute;
+            top: 0px;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            border-top: 1px solid #ffffff;
+            border-bottom: 1px solid #adb4b7;
+            background-color: #f0f0f0;
+            background: url(img/handle_horizontal.png) no-repeat 50% 50%, -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #f0f7fa), color-stop(0.1, #d9e0e4), color-stop(0.8, #c2c9cd));
+            -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+        }
+
+        #my-bar {
+            padding-top: 8px;
+            padding-left: 40px;
+            /** left: 28px; */
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="navbar navbar-fixed-top">
+
+    <div class="navbar-inner">
+        <div class="container">
+
+            <!-- ui-sref is a great directive for linking a state location with an anchor link.
+                 You should almost always use ui-sref instead of href on your links when you want
+                 then to navigate to a state. When this link is clicked it will take the application
+                 to the 'home' state. Behind the scenes the directive also adds the correct href attr
+                 and url. -->
+            <a class="brand" ui-sref="home">ui-router</a>
+
+            <ul class="nav">
+
+                <!-- Here you can see ui-sref in action again. Also notice the use of $state.includes, which
+                     will set the links to 'active' if, for example on the first link, 'phones' or any of
+                     its descendant states are activated. -->
+                <li ng-class="{ active: $state.includes('phones') }"><a ui-sref="phones.list">Phones</a></li>
+                <li ng-class="{ active: $state.includes('about') }"><a ui-sref="about">About</a></li>
+            </ul>
+
+            <!-- Here is a named ui-view. ui-views don't have to be named, but we'll be populate this
+                 on from various different child states and we want a name to help us target. -->
+            <p ui-view="hint" class="navbar-text pull-right"></p>
+
+        </div>
+    </div>
+</div>
+
+<!-- Here is the main ui-view (unnamed) and will be populate by its immediate children's templates
+     unless otherwise explicitly named views are targeted. It's also employing ng-animate. -->
+<div ui-view class="container" style="margin-top:60px" ng-animate="{enter:'fade-enter'}"></div>
+
+
+<hr>
+
+<pre>
+  <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+  $state = {{$state.current.name}}
+  $stateParams = {{$stateParams}}
+  $state full url = {{ $state.$current.url.source }}
+  <!-- $state.$current is not a public api, we are using it to
+       display the full url for learning purposes-->
+</pre>
+
+
+</body>
+</html>

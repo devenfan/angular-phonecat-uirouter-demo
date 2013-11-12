@@ -1,0 +1,41 @@
+<div class="row">
+
+    <div class="span3" style=" width: 200px;">
+
+        <div class="pa-sidebar well well-small" >
+
+            <ul class="nav nav-list">
+
+                <li ng-class="{ active: $state.includes('phones.list') }">
+                    <a ui-sref="phones.list">All Phones</a>
+                </li>
+
+                <li class="nav-header">Top 5</li>
+
+                <!-- This <li> will only add the 'active' class if 'contacts.detail' or its descendants are active
+                     AND if it is the link for the active phone (aka phoneId) -->
+                <li ng-repeat="phone in phones | limitTo: 5"
+                    ng-class="{ active: $state.includes('phones.detail') && $stateParams.phoneId == phone.id }">
+
+                    <!-- Here's a ui-sref that is also providing necessary parameters -->
+                    <a ui-sref="phones.detail({phoneId:phone.id})">{{phone.name}}</a>
+                </li>
+            </ul>
+
+            <hr>
+
+            <!--
+            <button class="btn" ng-click="goToRandom()">Show random Phone</button>
+            -->
+            <!-- Another named view  -->
+            <div ui-view="menuTip"></div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Our unnamed main ui-view for this template -->
+    <div ui-view class="span9" ng-animate="{enter:'fade-enter'}"></div>
+
+</div>

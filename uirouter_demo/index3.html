@@ -41,48 +41,80 @@
 
 <div class="row-fluid">
 
-    <div style="width:100px; margin-top: 0px; margin-left: 0px; float:left;">
+    <!-- <div class="navbar navbar-inner well-large"> -->
+    <div style="width:50px; height: 400px; background:#f8f8f8;
+            margin-top: 0px; margin-left: 0px; float:left;
+            border-left: 0px solid #ffcc31; border-right: 0px solid #ffcc31;
+            border-top: 0px solid #ffcc31; border-bottom: 0px solid #ffcc31; ">
 
-        <!-- <div class="navbar navbar-inner well-large"> -->
-        <div class="navbar navbar-inner well-large">
+        <!--<div class="container">-->
 
-            <!--<div class="container">-->
+        <!-- ui-sref is a great directive for linking a state location with an anchor link.
+             You should almost always use ui-sref instead of href on your links when you want
+             then to navigate to a state. When this link is clicked it will take the application
+             to the 'home' state. Behind the scenes the directive also adds the correct href attr
+             and url.
+        <a class="brand" ui-sref="home">ui-router</a>
+        -->
 
-                <!-- ui-sref is a great directive for linking a state location with an anchor link.
-                     You should almost always use ui-sref instead of href on your links when you want
-                     then to navigate to a state. When this link is clicked it will take the application
-                     to the 'home' state. Behind the scenes the directive also adds the correct href attr
-                     and url.
-                <a class="brand" ui-sref="home">ui-router</a>
-                -->
+        <ul class="nav nav-list">
+            <!-- Here you can see ui-sref in action again. Also notice the use of $state.includes, which
+                 will set the links to 'active' if, for example on the first link, 'contacts' or any of
+                 its descendant states are activated. -->
+            <li ng-class="{ active: $state.includes('home') }"><a ui-sref="home">首页</a></li>
+            <li ng-class="{ active: $state.includes('contacts') }"><a ui-sref="contacts.list">联系人</a></li>
+            <li ng-class="{ active: $state.includes('about') }"><a ui-sref="about">关于</a></li>
+        </ul>
 
-                <ul class="nav nav-list">
-                    <!-- Here you can see ui-sref in action again. Also notice the use of $state.includes, which
-                         will set the links to 'active' if, for example on the first link, 'contacts' or any of
-                         its descendant states are activated. -->
-                    <li ng-class="{ active: $state.includes('home') }"><a ui-sref="home">首页</a></li>
-                    <li ng-class="{ active: $state.includes('contacts') }"><a ui-sref="contacts.list">联系人</a></li>
-                    <li ng-class="{ active: $state.includes('about') }"><a ui-sref="about">关于</a></li>
-                </ul>
+        <!-- Here is a named ui-view. ui-views don't have to be named, but we'll be populate this
+             on from various different child states and we want a name to help us target.
+        <p ui-view="hint" class="navbar-text pull-right"></p>
+        -->
+        <!--</div>-->
 
-                <!-- Here is a named ui-view. ui-views don't have to be named, but we'll be populate this
-                     on from various different child states and we want a name to help us target.
-                <p ui-view="hint" class="navbar-text pull-right"></p>
-                -->
-            <!--</div>-->
-
-        </div>
     </div>
-
 
 
     <!-- Here is the main ui-view (unnamed) and will be populate by its immediate children's templates
          unless otherwise explicitly named views are targeted. It's also employing ng-animate.
     <div ui-view class="container" style="margin-top:60px" ng-animate="{enter:'fade-enter'}"></div> -->
-
+    <!--
     <div ui-view style="margin-top: 0px; margin-left: 20px; width: 800px; float:left;
         background-color: #ffffff" ng-animate="{enter:'fade-enter'}"></div>
+    -->
 
+    <div  style="width: 160px; height: 400px;
+         margin-top: 0px; margin-left: 0px; float:left;">
+
+        <ul class="nav nav-list">
+
+            <li class="nav-header">Top Contacts</li>
+
+            <li class="active"><a>Contact 1</a></li>
+
+            <li><a>Contact 2</a></li>
+
+            <li><a>Contact 3</a></li>
+
+            <li><a>Contact 4</a></li>
+
+            <!-- This <li> will only add the 'active' class if 'contacts.detail' or its descendants are active
+                 AND if it is the link for the active contact (aka contactId) -->
+            <li ng-repeat="contact in contacts | limitTo:2"
+                ng-class="{ active: $state.includes('contacts.detail') && $stateParams.contactId == contact.id }">
+
+                <!-- Here's a ui-sref that is also providing necessary parameters -->
+                <a ui-sref="contacts.detail({contactId:contact.id})">{{contact.name}}</a>
+            </li>
+        </ul>
+
+
+        <hr>
+
+        <!-- Another named view  -->
+        <div ui-view="menuTip"></div>
+
+    </div>
 
 </div>
 

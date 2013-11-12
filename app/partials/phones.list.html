@@ -1,0 +1,6 @@
+<h2>Phones List</h2>
+<ul>
+  <li ng-repeat="phone in phones">
+    <a ui-sref="phones.detail({phoneId:phone.id})">{{phone.name}}</a>
+  </li>
+</ul>    

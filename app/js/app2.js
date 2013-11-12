@@ -12,6 +12,8 @@ var phonecatApp = angular.module('phonecatApp', [
     'phonecatDirectives'
 ]);
 
+// -----------------------------------------------------------------------------------
+
 phonecatApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
