@@ -21,7 +21,7 @@ Angular Phonecat Demo porting for Angular UI-Router (https://github.com/angular-
 - http://karma-runner.github.io/
 
 ### Jasmine
-- http://pivotal.github.io/jasmine/
+- https://jasmine.github.io/
 
 
 ## Libraries
